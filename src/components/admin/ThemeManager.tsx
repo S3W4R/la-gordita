@@ -30,6 +30,12 @@ const COLORS = [
   { name: "Gris Pizarra", value: "#1e2328" },
   { name: "Verde Oliva", value: "#1a1e0f" },
   { name: "Azul Medianoche", value: "#0f1a28" },
+  { name: "Rosa Brillante", value: "#E91E63" },
+  { name: "Verde Esmeralda", value: "#1B4D3E" },
+  { name: "Naranja Cálido", value: "#D17B4F" },
+  { name: "Lila Suave", value: "#B39DDB" },
+  { name: "Menta Clara", value: "#7FCBC4" },
+  { name: "Magenta Oscuro", value: "#8E1555" },
 ];
 
 const ThemeManager = () => {
