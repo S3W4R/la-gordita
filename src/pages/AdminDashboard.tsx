@@ -50,7 +50,7 @@ const AdminDashboard = () => {
 
       setIsAdmin(true);
     } catch (error) {
-      console.error("Error checking auth:", error);
+      // Security: Don't log detailed errors in production
       navigate("/admin");
     } finally {
       setLoading(false);

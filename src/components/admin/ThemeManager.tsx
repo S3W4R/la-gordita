@@ -58,7 +58,7 @@ const ThemeManager = () => {
         setSelectedColor(data.background_color);
       }
     } catch (error) {
-      console.error("Error loading theme settings:", error);
+      // Security: Don't log detailed errors in production
     }
   };
 
@@ -85,7 +85,7 @@ const ThemeManager = () => {
       // Reload page to apply changes
       setTimeout(() => window.location.reload(), 1000);
     } catch (error) {
-      console.error("Error updating theme:", error);
+      // Security: Don't log detailed errors in production
       toast({
         title: "Error",
         description: "No se pudo actualizar el tema.",
