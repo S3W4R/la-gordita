@@ -92,6 +92,30 @@ export type Database = {
         }
         Relationships: []
       }
+      theme_settings: {
+        Row: {
+          background_color: string
+          created_at: string
+          font_family: string
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          background_color?: string
+          created_at?: string
+          font_family?: string
+          id?: string
+          updated_at?: string
+        }
+        Update: {
+          background_color?: string
+          created_at?: string
+          font_family?: string
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string

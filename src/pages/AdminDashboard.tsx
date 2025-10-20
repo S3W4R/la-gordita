@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { LogOut, Calendar, Newspaper, Image } from "lucide-react";
+import { LogOut, Calendar, Newspaper, Image, Palette } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import logo from "@/assets/la-gordita-logo.png";
 import EventsManager from "@/components/admin/EventsManager";
 import PublicationsManager from "@/components/admin/PublicationsManager";
 import GalleryManager from "@/components/admin/GalleryManager";
+import ThemeManager from "@/components/admin/ThemeManager";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -118,6 +119,10 @@ const AdminDashboard = () => {
               <Image className="w-4 h-4 mr-2" />
               Galería
             </TabsTrigger>
+            <TabsTrigger value="theme" className="data-[state=active]:bg-accent data-[state=active]:text-accent-foreground">
+              <Palette className="w-4 h-4 mr-2" />
+              Tema
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="events">
@@ -130,6 +135,10 @@ const AdminDashboard = () => {
 
           <TabsContent value="gallery">
             <GalleryManager />
+          </TabsContent>
+
+          <TabsContent value="theme">
+            <ThemeManager />
           </TabsContent>
         </Tabs>
       </div>

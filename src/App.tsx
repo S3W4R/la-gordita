@@ -13,31 +13,36 @@ import Auth from "./pages/Auth";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
 import SocialFloatingButtons from "./components/SocialFloatingButtons";
+import { useTheme } from "./hooks/useTheme";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/welcome" element={<Welcome />} />
-          <Route path="/menu" element={<Menu />} />
-          <Route path="/eventos" element={<Events />} />
-          <Route path="/publicaciones" element={<Publications />} />
-          <Route path="/galeria" element={<Gallery />} />
-          <Route path="/admin" element={<Auth />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <SocialFloatingButtons />
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  useTheme(); // Apply theme globally
+  
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/welcome" element={<Welcome />} />
+            <Route path="/menu" element={<Menu />} />
+            <Route path="/eventos" element={<Events />} />
+            <Route path="/publicaciones" element={<Publications />} />
+            <Route path="/galeria" element={<Gallery />} />
+            <Route path="/admin" element={<Auth />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <SocialFloatingButtons />
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
