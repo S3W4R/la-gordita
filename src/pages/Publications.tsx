@@ -60,12 +60,24 @@ const Publications = () => {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {publication.image_url && (
-                  <div className="aspect-video">
+                  <div className="aspect-video relative">
                     <img
                       src={publication.image_url}
                       alt={publication.title}
                       className="w-full h-full object-cover"
                     />
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <span 
+                        className="text-white text-4xl md:text-5xl font-bold opacity-80"
+                        style={{ 
+                          transform: 'rotate(45deg)',
+                          textShadow: '2px 2px 8px rgba(0,0,0,0.8)',
+                          letterSpacing: '0.1em'
+                        }}
+                      >
+                        PROXIMAMENTE
+                      </span>
+                    </div>
                   </div>
                 )}
                 <div className="p-6">
