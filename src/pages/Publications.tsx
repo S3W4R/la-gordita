@@ -68,12 +68,12 @@ const Publications = () => {
                     />
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none p-4">
                       <span 
-                        className="text-white font-bold opacity-80 whitespace-nowrap"
+                        className="text-white font-bold opacity-90 whitespace-nowrap"
                         style={{ 
-                          fontSize: 'clamp(1.5rem, 5vw, 3.5rem)',
+                          fontSize: 'clamp(1rem, 4vw, 2rem)',
                           transform: 'rotate(45deg)',
-                          textShadow: '2px 2px 8px rgba(0,0,0,0.8)',
-                          letterSpacing: '0.1em'
+                          textShadow: '3px 3px 10px rgba(0,0,0,0.9)',
+                          letterSpacing: '0.15em'
                         }}
                       >
                         PROXIMAMENTE
