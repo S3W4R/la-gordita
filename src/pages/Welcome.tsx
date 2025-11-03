@@ -1,9 +1,26 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import logo from "@/assets/la-gordita-logo.png";
 
 const Welcome = () => {
   const navigate = useNavigate();
+
+  const { data: settings } = useQuery({
+    queryKey: ["site-settings"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("site_settings")
+        .select("*")
+        .single();
+
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  const logoSrc = settings?.homepage_logo_url || logo;
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 bg-background">
@@ -11,7 +28,7 @@ const Welcome = () => {
         {/* Logo */}
         <div className="animate-in fade-in duration-500">
           <img 
-            src={logo} 
+            src={logoSrc} 
             alt="La Gordita" 
             className="w-72 md:w-96 mx-auto drop-shadow-[0_0_30px_rgba(71,184,129,0.4)]"
           />

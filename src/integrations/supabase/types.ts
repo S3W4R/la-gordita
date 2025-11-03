@@ -92,6 +92,27 @@ export type Database = {
         }
         Relationships: []
       }
+      site_settings: {
+        Row: {
+          created_at: string
+          homepage_logo_url: string
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          homepage_logo_url?: string
+          id?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          homepage_logo_url?: string
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       theme_settings: {
         Row: {
           background_color: string
