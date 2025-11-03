@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, Upload } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 const HomepageManager = () => {
   const { toast } = useToast();
@@ -189,43 +189,75 @@ const HomepageManager = () => {
         </CardContent>
       </Card>
 
-      {/* Admin Users Creation */}
+      {/* Manual Admin Creation */}
       <Card>
         <CardHeader>
-          <CardTitle>Crear Usuarios Administradores</CardTitle>
+          <CardTitle>Agregar Administrador</CardTitle>
           <CardDescription>
-            Ejecutar esta acción creará los usuarios administradores predefinidos
+            Crea un nuevo usuario administrador manualmente
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Button
-            onClick={async () => {
-              try {
-                const { data, error } = await supabase.functions.invoke('create-admin-users');
-                
-                if (error) throw error;
+          <form onSubmit={async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.currentTarget);
+            const email = formData.get('email') as string;
+            const password = formData.get('password') as string;
 
-                const successCount = data.results.filter((r: any) => r.success).length;
-                const failCount = data.results.filter((r: any) => !r.success).length;
+            if (!email || !password) {
+              toast({
+                title: "Error",
+                description: "Por favor completa todos los campos",
+                variant: "destructive",
+              });
+              return;
+            }
 
-                toast({
-                  title: "Proceso completado",
-                  description: `${successCount} administradores creados exitosamente. ${failCount} fallos.`,
-                });
+            try {
+              const { data, error } = await supabase.functions.invoke('create-admin-user', {
+                body: { email, password }
+              });
 
-                console.log('Resultados detallados:', data.results);
-              } catch (error: any) {
-                toast({
-                  title: "Error",
-                  description: `Error al crear administradores: ${error.message}`,
-                  variant: "destructive",
-                });
-              }
-            }}
-          >
-            <Upload className="mr-2 h-4 w-4" />
-            Crear Administradores
-          </Button>
+              if (error) throw error;
+
+              toast({
+                title: "Éxito",
+                description: data.message || "Administrador creado correctamente",
+              });
+
+              e.currentTarget.reset();
+            } catch (error: any) {
+              toast({
+                title: "Error",
+                description: error.message || "Error al crear administrador",
+                variant: "destructive",
+              });
+            }
+          }} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="admin-email">Email</Label>
+              <Input
+                id="admin-email"
+                name="email"
+                type="email"
+                placeholder="correo@ejemplo.com"
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="admin-password">Contraseña</Label>
+              <Input
+                id="admin-password"
+                name="password"
+                type="password"
+                placeholder="Contraseña segura"
+                required
+              />
+            </div>
+            <Button type="submit">
+              Crear Administrador
+            </Button>
+          </form>
         </CardContent>
       </Card>
     </div>
